@@ -4,6 +4,19 @@
 
 #include "minikame.h"
 
+#define INIT      0
+#define WALK      1
+#define RUN       2
+#define LEFT      3
+#define RIGHT     4
+#define STOP      5
+#define HELLO     6
+#define UPDOWN    7
+#define DANCE     8
+#define PUSHUP    9
+#define FRONTBACK 10
+#define MOONWALK  11
+
 MiniKame robot;
 
 bool running = 0;
@@ -113,82 +126,76 @@ void parseData(String data)
 {
     switch (data.toInt())
     {
-        case 0:
+        case INIT:
             Serial.println("init");
             robot.init();
             inited = 1;
             break;
       
-        case 1:
+        case WALK:
             Serial.println("walk");
             robot.walk(1,550);
             running = 1;
             break;
 
-        case 2:
+        case RUN:
             Serial.println("run");
             robot.run(1,550);
             running = 1;
             break;
 
-        case 3:
+        case LEFT:
             Serial.println("left");
             robot.turnL(1,550);
             running = 1;
             break;
 
-        case 4:
+        case RIGHT:
             Serial.println("right");
             robot.turnR(1,550);
             running = 1;
             break;
 
-        case 5:
+        case STOP:
             Serial.println("stop");
             running = 0;
             break;
 
-        case 6:
-            Serial.println("pushup");
-            robot.pushUp(2,2000);
-            running = 0;
-            break;
-
-        case 7:
-            Serial.println("updown");
-            robot.upDown(4,250);
-            running = 0;
-            break;
-
-        case 8:
-            Serial.println("jump");
-            robot.jump();
-            running = 0;
-            break;
-
-        case 9:
+        case HELLO:
             Serial.println("hello");
             robot.hello();
             running = 0;
             break;
 
-        case 10: // punch
-            Serial.println("frontback");
-            robot.frontBack(4,200);
+        case UPDOWN:
+            Serial.println("updown");
+            robot.upDown(4,250);
             running = 0;
             break;
 
-        case 11:
+        case DANCE:
             Serial.println("dance");
             robot.dance(2,1000);
             running = 0;
             break;
 
-        case 12:
-            Serial.println("moonwalk");
-            robot.dance(2,2000);
+        case PUSHUP:
+            Serial.println("pushup");
+            robot.pushUp(2,2000);
             running = 0;
             break;
+
+        case FRONTBACK:
+            Serial.println("frontback");
+            robot.frontBack(4,200);
+            running = 0;
+            break;
+
+        case MOONWALK:
+            Serial.println("moonwalk");
+            robot.moonwalkL(2,1000);
+            running = 0;
+            break;        
 
         default:
             Serial.println("home");
